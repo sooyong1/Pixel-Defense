@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
-    //jjang e
+    //jjang
     protected enum State { Search, Attack };
     
     public GameObject[] towersAllBullet;
