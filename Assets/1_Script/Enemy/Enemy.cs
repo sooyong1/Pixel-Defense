@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour
     public bool isFly = false;      // 특정 타워는 얘를 공격 못함
     public bool isArmor = false;    // 특정 타워는 얘를 공격 못함
     public bool isHard = false;
-
+    
     private GameManager gameManager;
     private int curHp;
     private int curShield;

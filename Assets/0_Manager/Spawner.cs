@@ -41,7 +41,7 @@ public class Spawner : MonoBehaviour
     }
 
     IEnumerator RunWave()
-    {
+    {        
         int curGroup = 0;        
 
         while (curGroup < wave[curWave].waveData.Length)

@@ -79,6 +79,10 @@ public class Doll_Puppet : Tower
 
     protected override void SetUpgrade_Level2_Type2()
     {
+        //총알 종류 변화, 탄환 최대 공격 가능 수 3
+        SetUsingBulletType(1);
+        maxAttackCount = 3;        
+
         SetUpgrade1Function(SetUpgrade_Level2_Type2_Elite);        
         SetUpgradePrice1(new int[] { 2, 0, 4, 4 });
         SetUpgrade1Info("elite");
@@ -91,6 +95,9 @@ public class Doll_Puppet : Tower
 
     protected override void SetUpgrade_Level2_Type1_Elite()
     {
+        //공격 속도 증가
+        attackRate += 0.5f;
+
         SetUpgrade1Function(SetUpgrade_Level3_Type1);
         SetUpgradePrice1(new int[] { 2, 4, 4, 0 });
         SetUpgrade1Info("ty");
@@ -102,6 +109,9 @@ public class Doll_Puppet : Tower
 
     protected override void SetUpgrade_Level2_Type2_Elite()
     {
+        //아머 적 공격 가능
+        canAttackArmor = true;
+
         SetUpgrade1Function(SetUpgrade_Level3_Type3);
         SetUpgradePrice1(new int[] { 2, 0, 4, 4 });
         SetUpgrade1Info("nw");
@@ -117,6 +127,9 @@ public class Doll_Puppet : Tower
 
     protected override void SetUpgrade_Level3_Type1()
     {
+        SetSkill(Skill1);
+        isSkillReady = true;
+
         SetUpgrade1Function(null);
         SetUpgradePrice1(new int[] { 0, 0, 0, 0 });
         SetUpgrade1Info("");
@@ -178,5 +191,26 @@ public class Doll_Puppet : Tower
         outbullet3.transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward) * Quaternion.Euler(new Vector3(0, 0, 30));
         outbullet3.transform.position = transform.position;
     }
+
+    //Skill
+    protected override void Skill1()
+    {
+        float target_x = target.transform.position.x;
+        float target_y = target.transform.position.y;
+
+        GameObject skillObj = Instantiate(towersAllSkill[0], new Vector3(target_x, target_y, 0), Quaternion.identity);
+        Attack_Parent skillObjScript = skillObj.GetComponent<Attack_Parent>();
+
+        skillObjScript.SetMasterTower(this.gameObject);
+        skillObjScript.SetDamage((int)(attackDamage * 1.5f), attackDamage + (int)(attackDamage * attackShieldDamageRate));
+        skillObjScript.SetCanAttackFly(canAttackFly);
+        skillObjScript.SetCanAttackArmor(canAttackArmor);
+        skillObjScript.SetMaxAttackCount(maxAttackCount);
+        skillObjScript.SetComboAttackCount(comboAttackCount);
+        skillObjScript.StatusEffect(isCold, isBurn, isChaos, isStun, isPushBack);
+
+        StartCoroutine("SkillCoolTime", skill1CoolTime);
+    }
+
 
 }

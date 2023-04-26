@@ -8,18 +8,19 @@ public class Tower : MonoBehaviour
     protected enum State { Search, Attack };
     
     public GameObject[] towersAllBullet;
+    public GameObject[] towersAllSkill;
     public GameObject arrangeSprite;
     public Transform firePosition;
     public float attackRange = 2f;
     public int attackDamage = 50;
     public float attackRate = 1f;
-    public int attackShieldDamageRate = -1; // 만약 -1 => damage/2,  
+    public float attackShieldDamageRate = 0; 
     public float bulletLifeTime = 0.2f;
-    public int maxAttackCount = 1;
-    public int comboAttackCount = 1;
+    public int maxAttackCount = 1;      //하나의 투사체가 공격할 수 있는 적들의 수
+    public int comboAttackCount = 1;    //한번 공격으로 여러번 데미지를 입힘
 
-    protected int usingBulletType = 0;
-    protected GameObject bullet;
+    public int usingBulletType = 0;
+    protected GameObject bullet;    
 
     [Header("Specific Attack")]
     [SerializeField] protected bool canAttackFly = false;
@@ -40,6 +41,14 @@ public class Tower : MonoBehaviour
     [HideInInspector] public Callback curAttackFunc = null;
     [HideInInspector] public Callback Upgrade1 = null;
     [HideInInspector] public Callback Upgrade2 = null;
+    [HideInInspector] public Callback Skill = null;
+
+    protected bool isSkillReady = false;
+    protected float skill1CoolTime = 5f;
+    protected float skill2CoolTime = 5f;
+    protected float skill3CoolTime = 5f;
+    protected float skill4CoolTime = 5f;
+
     protected int[] upgrade1_Price = {0, 0, 0, 0};
     protected int[] upgrade2_Price = { 0, 0, 0, 0 };
 
@@ -65,17 +74,18 @@ public class Tower : MonoBehaviour
 
         SetUpgradeInit();        
         SetCurrentAttackFunction(DefaultAttack);
-    }   
+    }
 
 
     IEnumerator Attack()
-    {        
-        while(target != null && Vector3.Distance(transform.position, target.transform.position) <= attackRange && target.activeSelf)
+    {
+        while (target != null && Vector3.Distance(transform.position, target.transform.position) <= attackRange && target.activeSelf)
         {            
-            if(target.transform.position.x > transform.position.x) transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+            //타겟의 위치에 따라 바라보는 방향 전환
+                if (target.transform.position.x > transform.position.x) transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
             else transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
 
-            anim.SetTrigger("Attack");
+            anim.SetTrigger("Attack");            
             yield return new WaitForSeconds(attackRate);
         }
         
@@ -84,7 +94,7 @@ public class Tower : MonoBehaviour
     }
 
     IEnumerator SearchTarget()
-    {        
+    {
         while (target == null)
         {
             yield return null;
@@ -116,8 +126,9 @@ public class Tower : MonoBehaviour
         switch (changeState)
         {
             case State.Search:
+                anim.SetTrigger("Stop");
                 StopCoroutine("Attack");
-                StartCoroutine("SearchTarget");
+                StartCoroutine("SearchTarget");                
                 break;
 
             case State.Attack:
@@ -137,7 +148,7 @@ public class Tower : MonoBehaviour
         outBulletScript.SetLifeTime(bulletLifeTime);
         outBullet.SetActive(true);
         outBulletScript.SetMasterTower(this.gameObject);        
-        outBulletScript.SetDamage(attackDamage, attackShieldDamageRate);
+        outBulletScript.SetDamage(attackDamage, attackDamage + (int)(attackDamage * attackShieldDamageRate) );
         outBulletScript.SetCanAttackFly(canAttackFly);
         outBulletScript.SetCanAttackArmor(canAttackArmor);
         outBulletScript.SetMaxAttackCount(maxAttackCount);
@@ -237,13 +248,22 @@ public class Tower : MonoBehaviour
 
     public void Fire()
     {
-        if (target == null)
-        {            
-            anim.SetTrigger("Stop");
+        if (target == null || target.transform.position.y == 100)
+        {
+            target = null;
+            ChangeState(State.Search);                     
             return;
         }
 
-        curAttackFunc();
+        if (isSkillReady) Skill();
+        else curAttackFunc();
+    }
+
+    IEnumerator SkillCoolTime(float coolTime)
+    {
+        isSkillReady = false;
+        yield return new WaitForSeconds(coolTime);
+        isSkillReady = true;
     }
 
 
@@ -259,6 +279,10 @@ public class Tower : MonoBehaviour
     protected void SetUpgrade2Function(Callback cal)
     {
         Upgrade2 = cal;        
+    }
+    protected void SetSkill(Callback cal)
+    {
+        Skill = cal;
     }
 
     protected virtual void SetUpgradeInit() { }
@@ -291,5 +315,10 @@ public class Tower : MonoBehaviour
     protected virtual void UpgradeAttack_Leve3_Tyep2() { }
     protected virtual void UpgradeAttack_Leve3_Tyep3() { }
     protected virtual void UpgradeAttack_Leve3_Tyep4() { }
+
+    protected virtual void Skill1() { }
+    protected virtual void Skill2() { }
+    protected virtual void Skill3() { }
+    protected virtual void Skill4() { }
 
 }

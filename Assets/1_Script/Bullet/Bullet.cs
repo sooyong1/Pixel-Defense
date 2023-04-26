@@ -2,31 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class Bullet : Attack_Parent
 {
-    private int damage = 0;
-    private int shieldDamage = 0;
-    private GameObject masterTower;
-    private Tower masterTowerScript;
+
     private float lifeTime = 1f;
-    private int maxAttackCount = 1;
     private int bulletType = 0;
-    private int comboAttackCount = 1;
-    private float decreaseDamageRateComboAttack = 1f;
-
-    [Header("Specific Attack")]
-    private bool canAttackFly = false;
-    private bool canAttackArmor = false;
-
-    private bool isCold = false;
-    private bool isBurn = false;
-    private bool isChaos = false;
-    private bool isStun = false;
-    private bool isPushBack = false;
 
     void OnEnable()
     {
-        StartCoroutine("RunLifeTime");
+        StartCoroutine("RunLifeTime");        
     }
 
     IEnumerator RunLifeTime()
@@ -84,51 +68,13 @@ public class Bullet : MonoBehaviour
         else Destroy(this.gameObject);
     }
 
-    public void SetDamage(int inputDamage, int inputShieldDamage = -1)
-    {
-        damage = inputDamage;
-
-        if (inputShieldDamage == -1) shieldDamage = (int)(inputDamage * 0.2);
-        else shieldDamage = inputDamage * inputShieldDamage;
-
-    }
-
-    public void SetMasterTower(GameObject tower)
-    {
-        masterTower = tower;
-        masterTowerScript = masterTower.GetComponent<Tower>();
-    }
     public void SetLifeTime(float value)
     {
         lifeTime = value;
     }
-    public void SetCanAttackFly(bool isCan)
-    {
-        canAttackFly = isCan;
-    }
-    public void SetCanAttackArmor(bool isCan)
-    {
-        canAttackArmor = isCan;
-    }
-    public void SetMaxAttackCount(int value)
-    {
-        maxAttackCount = value;
-    }
+
     public void SetBulletType(int inputType)
     {
         bulletType = inputType;
-    }
-    public void SetComboAttackCount(int value)
-    {
-        comboAttackCount = value;
-    }
-
-    public void StatusEffect(bool inputIsCold, bool inputIsBurn, bool inputIsChaos, bool inputIsStun, bool inputIsPushBack)
-    {
-        isCold = inputIsCold;
-        isBurn = inputIsBurn;
-        isChaos = inputIsChaos;
-        isStun = inputIsStun;
-        isPushBack = inputIsPushBack;
     }
 }

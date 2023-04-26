@@ -50,16 +50,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towersAllBullet:
   - {fileID: 3893401646320495256, guid: a9cfd144fd9fae448ab73c2b8beccf28, type: 3}
-  - {fileID: 3893401646320495256, guid: c40ae5d219174414a8f334a879635891, type: 3}
+  - {fileID: 3893401646320495256, guid: c6969c8268c46cf408f611c4d07dd781, type: 3}
+  towersAllSkill:
+  - {fileID: 896614283024788229, guid: 6bbc223d4a869da46bf4bd562ad3e301, type: 3}
   arrangeSprite: {fileID: 6236836855029943862}
   firePosition: {fileID: 7434836161347231362}
   attackRange: 1.5
   attackDamage: 50
   attackRate: 1
-  attackShieldDamageRate: 3
+  attackShieldDamageRate: -0.2
   bulletLifeTime: 0.5
   maxAttackCount: 1
-  comboAttackCount: 1
+  comboAttackCount: 3
+  usingBulletType: 0
   canAttackFly: 0
   canAttackArmor: 0
   isCold: 0
@@ -204,6 +207,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: b34437baa31519549bf60fa46d69e060, type: 2}
+    - target: {fileID: 5393675509305470399, guid: 881c7c33ec893dd42ad24c8de258edc2, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7117044273671816800, guid: 881c7c33ec893dd42ad24c8de258edc2, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
