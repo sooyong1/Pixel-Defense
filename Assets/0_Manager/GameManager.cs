@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Text waveTxt;
     [SerializeField] private int startLife = 50;
     private int curLife;
-    private int waveCount = 0;
+    public int waveCount = 0;
 
     private bool isSpawnerWorking = false;
     private bool isEnemyInTrack = false;

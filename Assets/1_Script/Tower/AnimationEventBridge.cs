@@ -15,4 +15,9 @@ public class AnimationEventBridge : MonoBehaviour
     {
         tower.Fire();
     }
+
+    public void CheckLostTarget()
+    {
+        tower.CheckLostTarget();
+    }
 }

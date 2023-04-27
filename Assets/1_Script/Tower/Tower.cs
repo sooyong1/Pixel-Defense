@@ -6,7 +6,11 @@ public class Tower : MonoBehaviour
 {
     //jjang
     protected enum State { Search, Attack };
-    
+
+    [Header("TowerSkin")]
+    [SerializeField] protected GameObject[] towerSkin;
+    private int curSkinNum = 0;
+
     public GameObject[] towersAllBullet;
     public GameObject[] towersAllSkill;
     public GameObject arrangeSprite;
@@ -44,10 +48,11 @@ public class Tower : MonoBehaviour
     [HideInInspector] public Callback Skill = null;
 
     protected bool isSkillReady = false;
-    protected float skill1CoolTime = 5f;
-    protected float skill2CoolTime = 5f;
-    protected float skill3CoolTime = 5f;
-    protected float skill4CoolTime = 5f;
+    protected float curSkillCoolTime = 1f;
+    protected float skill1CoolTime = 8f;
+    protected float skill2CoolTime = 10f;
+    protected float skill3CoolTime = 13f;
+    protected float skill4CoolTime = 7f;
 
     protected int[] upgrade1_Price = {0, 0, 0, 0};
     protected int[] upgrade2_Price = { 0, 0, 0, 0 };
@@ -171,6 +176,14 @@ public class Tower : MonoBehaviour
         makeBullet.SetActive(false);
     }    
 
+    public void ChangeSkin(int skinNumber)
+    {
+        towerSkin[curSkinNum].SetActive(false);        
+        curSkinNum = skinNumber;
+        anim = towerSkin[curSkinNum].GetComponentInChildren<Animator>();
+        towerSkin[curSkinNum].SetActive(true);
+    }
+
     public void UpdateArrangeSpriteSize()
     {
         float newScale = attackRange / 0.5f;
@@ -248,14 +261,13 @@ public class Tower : MonoBehaviour
 
     public void Fire()
     {
-        if (target == null || target.transform.position.y == 100)
-        {
-            target = null;
-            ChangeState(State.Search);                     
-            return;
-        }
+        if (!CheckLostTarget()) return;
 
-        if (isSkillReady) Skill();
+        if (isSkillReady)
+        {
+            Skill();
+            StartCoroutine("SkillCoolTime", curSkillCoolTime);
+        }
         else curAttackFunc();
     }
 
@@ -266,6 +278,16 @@ public class Tower : MonoBehaviour
         isSkillReady = true;
     }
 
+    public bool CheckLostTarget()
+    {
+        if (target == null || target.transform.position.y == 100)
+        {
+            target = null;
+            ChangeState(State.Search);
+            return false;
+        }
+        return true;
+    }
 
 
     protected void SetCurrentAttackFunction(Callback cal)
@@ -280,9 +302,10 @@ public class Tower : MonoBehaviour
     {
         Upgrade2 = cal;        
     }
-    protected void SetSkill(Callback cal)
+    protected void SetSkill(Callback cal, float inputCoolTime)
     {
         Skill = cal;
+        curSkillCoolTime = inputCoolTime;
     }
 
     protected virtual void SetUpgradeInit() { }

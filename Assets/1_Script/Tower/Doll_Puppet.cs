@@ -34,19 +34,19 @@ public class Doll_Puppet : Tower
     {
         //공격범위 증가, 데미지 증가
         AddAttackRange(0.3f);
-        attackDamage += 30;        
+        attackDamage += 30;
 
         SetUpgrade1Function(SetUpgrade_Level1_Type1_Elite);
         SetUpgradePrice1(new int[] { 2, 0, 0, 2 });
         SetUpgrade1Info("Increase attack speed.");
 
-        SetUpgrade2Function(null);        
-        SetUpgradePrice2(new int[] { 0, 0, 0, 0 });        
+        SetUpgrade2Function(null);
+        SetUpgradePrice2(new int[] { 0, 0, 0, 0 });
         SetUpgrade2Info("");
     }
 
     protected override void SetUpgrade_Level1_Type1_Elite()
-    {        
+    {
         //데미지 증가, 공중 공격 가능
         attackDamage += 15;
         canAttackFly = true;
@@ -55,35 +55,37 @@ public class Doll_Puppet : Tower
         SetUpgradePrice1(new int[] { 2, 0, 0, 2 });
         SetUpgrade1Info("Increase attack speed.");
 
-        SetUpgrade2Function(SetUpgrade_Level2_Type2);        
-        SetUpgradePrice2(new int[] { 0, 2, 0, 2 });        
+        SetUpgrade2Function(SetUpgrade_Level2_Type2);
+        SetUpgradePrice2(new int[] { 0, 2, 0, 2 });
         SetUpgrade2Info("a");
     }
 
     /// Level 2
     protected override void SetUpgrade_Level2_Type1()
     {
+        ChangeSkin(1);
         //기본공격 강화, 데미지 증가, 범위 증가
         SetCurrentAttackFunction(UpgradeAttack_Leve2_Tyep1);
         attackDamage += 50;
         AddAttackRange(0.3f);
 
-        SetUpgrade1Function(SetUpgrade_Level2_Type1_Elite);        
+        SetUpgrade1Function(SetUpgrade_Level2_Type1_Elite);
         SetUpgradePrice1(new int[] { 2, 4, 4, 0 });
         SetUpgrade1Info("12");
 
         SetUpgrade2Function(null);
-        SetUpgradePrice2(new int[] { 0, 0, 0, 0 });        
+        SetUpgradePrice2(new int[] { 0, 0, 0, 0 });
         SetUpgrade2Info("");
     }
 
     protected override void SetUpgrade_Level2_Type2()
     {
+        ChangeSkin(2);
         //총알 종류 변화, 탄환 최대 공격 가능 수 3
         SetUsingBulletType(1);
-        maxAttackCount = 3;        
+        maxAttackCount = 3;
 
-        SetUpgrade1Function(SetUpgrade_Level2_Type2_Elite);        
+        SetUpgrade1Function(SetUpgrade_Level2_Type2_Elite);
         SetUpgradePrice1(new int[] { 2, 0, 4, 4 });
         SetUpgrade1Info("elite");
 
@@ -102,8 +104,8 @@ public class Doll_Puppet : Tower
         SetUpgradePrice1(new int[] { 2, 4, 4, 0 });
         SetUpgrade1Info("ty");
 
-        SetUpgrade2Function(SetUpgrade_Level3_Type2);        
-        SetUpgradePrice2(new int[] { 2, 4, 4, 0 });        
+        SetUpgrade2Function(SetUpgrade_Level3_Type2);
+        SetUpgradePrice2(new int[] { 2, 4, 4, 0 });
         SetUpgrade2Info("yt");
     }
 
@@ -116,8 +118,8 @@ public class Doll_Puppet : Tower
         SetUpgradePrice1(new int[] { 2, 0, 4, 4 });
         SetUpgrade1Info("nw");
 
-        SetUpgrade2Function(SetUpgrade_Level3_Type4);        
-        SetUpgradePrice2(new int[] { 2, 4, 0, 4 });        
+        SetUpgrade2Function(SetUpgrade_Level3_Type4);
+        SetUpgradePrice2(new int[] { 2, 4, 0, 4 });
         SetUpgrade2Info("t,");
     }
 
@@ -127,7 +129,9 @@ public class Doll_Puppet : Tower
 
     protected override void SetUpgrade_Level3_Type1()
     {
-        SetSkill(Skill1);
+        ChangeSkin(3);
+
+        SetSkill(Skill1, skill1CoolTime);
         isSkillReady = true;
 
         SetUpgrade1Function(null);
@@ -141,6 +145,11 @@ public class Doll_Puppet : Tower
 
     protected override void SetUpgrade_Level3_Type2()
     {
+        ChangeSkin(4);
+
+        SetSkill(Skill2, skill2CoolTime);
+        isSkillReady = true;
+
         SetUpgrade1Function(null);
         SetUpgradePrice1(new int[] { 0, 0, 0, 0 });
         SetUpgrade1Info("");
@@ -152,6 +161,11 @@ public class Doll_Puppet : Tower
 
     protected override void SetUpgrade_Level3_Type3()
     {
+        ChangeSkin(5);
+
+        SetSkill(Skill3, skill3CoolTime);
+        isSkillReady = true;
+
         SetUpgrade1Function(null);
         SetUpgradePrice1(new int[] { 0, 0, 0, 0 });
         SetUpgrade1Info("");
@@ -163,12 +177,17 @@ public class Doll_Puppet : Tower
 
     protected override void SetUpgrade_Level3_Type4()
     {
+        ChangeSkin(6);
+
+        SetSkill(Skill4, skill4CoolTime);
+        isSkillReady = true;
+
         SetUpgrade1Function(null);
         SetUpgradePrice1(new int[] { 0, 0, 0, 0 });
         SetUpgrade1Info("");
 
-        SetUpgrade2Function(null);        
-        SetUpgradePrice2(new int[] { 0, 0, 0, 0 });        
+        SetUpgrade2Function(null);
+        SetUpgradePrice2(new int[] { 0, 0, 0, 0 });
         SetUpgrade2Info("");
     }
 
@@ -181,15 +200,15 @@ public class Doll_Puppet : Tower
 
         GameObject outbullet1 = OutPool();
         outbullet1.transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward) * Quaternion.Euler(new Vector3(0, 0, -30));
-        outbullet1.transform.position = transform.position;
+        outbullet1.transform.position = firePosition.position;
 
         GameObject outbullet2 = OutPool();
         outbullet2.transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
-        outbullet2.transform.position = transform.position;
+        outbullet2.transform.position = firePosition.position;
 
         GameObject outbullet3 = OutPool();
         outbullet3.transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward) * Quaternion.Euler(new Vector3(0, 0, 30));
-        outbullet3.transform.position = transform.position;
+        outbullet3.transform.position = firePosition.position;
     }
 
     //Skill
@@ -205,11 +224,53 @@ public class Doll_Puppet : Tower
         skillObjScript.SetDamage((int)(attackDamage * 1.5f), attackDamage + (int)(attackDamage * attackShieldDamageRate));
         skillObjScript.SetCanAttackFly(canAttackFly);
         skillObjScript.SetCanAttackArmor(canAttackArmor);
-        skillObjScript.SetMaxAttackCount(maxAttackCount);
+        skillObjScript.SetMaxAttackCount(8);
         skillObjScript.SetComboAttackCount(comboAttackCount);
-        skillObjScript.StatusEffect(isCold, isBurn, isChaos, isStun, isPushBack);
+        skillObjScript.StatusEffect(false, false, false, false, false);
+        
+    }
 
-        StartCoroutine("SkillCoolTime", skill1CoolTime);
+    protected override void Skill2()
+    {
+        StartCoroutine("Skill2_SpeedBuff");
+    }
+    IEnumerator Skill2_SpeedBuff()
+    {
+        anim.SetFloat("AttackSpeed", 5f);
+        //attackRate = attackRate + 10;
+
+        yield return new WaitForSeconds(3f); 
+        
+        anim.SetFloat("AttackSpeed", 1f);
+        //attackRate = attackRate - 10;
+    }
+
+    protected override void Skill3()
+    {
+        float angle = LookTargetAngle();
+
+        GameObject skillObj = Instantiate(towersAllSkill[2], new Vector3(firePosition.position.x, firePosition.position.y, 0), Quaternion.AngleAxis(angle - 90, Vector3.forward));
+        Attack_Parent skillObjScript = skillObj.GetComponent<Attack_Parent>();
+
+        skillObjScript.SetMasterTower(this.gameObject);                        
+        skillObjScript.SetMaxAttackCount(5);                
+    }
+
+    protected override void Skill4()
+    {
+        float angle = LookTargetAngle();
+
+        GameObject skillObj = Instantiate(towersAllSkill[3], new Vector3(firePosition.position.x, firePosition.position.y, 0), Quaternion.AngleAxis(angle - 90, Vector3.forward));
+        Attack_Parent skillObjScript = skillObj.GetComponent<Attack_Parent>();                 
+
+        skillObjScript.SetMasterTower(this.gameObject);
+        skillObjScript.SetDamage((int)(attackDamage * 3f), attackDamage + (int)(attackDamage * attackShieldDamageRate));
+        skillObjScript.SetCanAttackFly(canAttackFly);
+        skillObjScript.SetCanAttackArmor(canAttackArmor);
+        skillObjScript.SetMaxAttackCount(8);
+        skillObjScript.SetComboAttackCount(comboAttackCount);
+        skillObjScript.StatusEffect(false, false, false, false, false);
+
     }
 
 

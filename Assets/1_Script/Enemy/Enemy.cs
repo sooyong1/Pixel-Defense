@@ -4,11 +4,15 @@ using UnityEngine;
 using Cinemachine;
 
 public class Enemy : MonoBehaviour
-{
+{    
+
     [HideInInspector] public ReviseCartCode cart;
+    
     public int maxHp = 150;
     public int maxShield = 0;
-    public int giveStone_White = 8;
+    private int initMaxHp;
+    private int initMaxShield;
+    public int giveStone_White = 8;    
 
     [Header("Specific")]
     public bool isFly = false;      // 특정 타워는 얘를 공격 못함
@@ -37,6 +41,8 @@ public class Enemy : MonoBehaviour
         cart = GetComponent<ReviseCartCode>();
         curHp = maxHp;
         curShield = maxShield;
+        initMaxHp = maxHp;
+        initMaxShield = maxShield;
         ShieldOnOff();
     }
 
@@ -51,6 +57,9 @@ public class Enemy : MonoBehaviour
 
     public void SetInitialize()
     {
+        maxHp = initMaxHp + (int)(initMaxHp * 0.02f * (gameManager.waveCount - 1));
+        maxShield = initMaxShield + (int)(initMaxShield * 0.15f * gameManager.waveCount);
+
         curHp = maxHp;
         curShield = maxShield;
         hpBar.SetHpBarRate(1);
@@ -103,9 +112,7 @@ public class Enemy : MonoBehaviour
 
                 if (curHp <= 0)
                 {
-                    isDead = true;
-                    GiveStone();
-                    ReturnPool();
+                    Dead();
                 }
             }
 
@@ -118,6 +125,13 @@ public class Enemy : MonoBehaviour
     public void Damage(int damage, int comboAttackCount = 1, float damageDecreaseRate = 1)
     {
         StartCoroutine(DamageCoroutine(damage, comboAttackCount, damageDecreaseRate));
+    }
+
+    public void Dead()
+    {
+        isDead = true;
+        GiveStone();
+        ReturnPool();
     }
 
     public void StatusEffect(bool inputIsCold, bool inputIsBurn, bool inputIsChaos, bool inputIsStun, bool inputIsPushBack)
