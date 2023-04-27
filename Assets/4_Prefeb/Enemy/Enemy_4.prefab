@@ -52,7 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cart: {fileID: 1213663812074972233}
   maxHp: 10
-  maxShield: 50
+  maxShield: 100
   giveStone_White: 8
   isFly: 0
   isArmor: 0

@@ -49,10 +49,11 @@ public class Tower : MonoBehaviour
 
     protected bool isSkillReady = false;
     protected float curSkillCoolTime = 1f;
-    protected float skill1CoolTime = 8f;
-    protected float skill2CoolTime = 10f;
-    protected float skill3CoolTime = 13f;
-    protected float skill4CoolTime = 7f;
+    [Header("Skill CoolTime")]
+    [SerializeField] protected float skill1CoolTime = 8f;
+    [SerializeField] protected float skill2CoolTime = 10f;
+    [SerializeField] protected float skill3CoolTime = 13f;
+    [SerializeField] protected float skill4CoolTime = 7f;
 
     protected int[] upgrade1_Price = {0, 0, 0, 0};
     protected int[] upgrade2_Price = { 0, 0, 0, 0 };
@@ -71,6 +72,8 @@ public class Tower : MonoBehaviour
         bullet = towersAllBullet[usingBulletType];
 
         UpdateArrangeSpriteSize();
+
+        if (attackShieldDamageRate < -1) attackShieldDamageRate = -1;
     }
 
     void Start()
@@ -164,6 +167,7 @@ public class Tower : MonoBehaviour
 
     public void InPool(GameObject obj)
     {
+        obj.transform.localScale = new Vector3(1, 1, 1);
         bulletPool.Enqueue(obj);
     }
 
@@ -271,6 +275,8 @@ public class Tower : MonoBehaviour
         else curAttackFunc();
     }
 
+
+    
     IEnumerator SkillCoolTime(float coolTime)
     {
         isSkillReady = false;

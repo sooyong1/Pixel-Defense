@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3505498975813103869}
-  - component: {fileID: -6040726557214408017}
+  - component: {fileID: -2648261910607804119}
   - component: {fileID: 6646438334774418686}
   m_Layer: 7
-  m_Name: Doll_Puppet
+  m_Name: Human_Archer
   m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36,7 +36,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-6040726557214408017
+--- !u!114 &-2648261910607804119
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3507091086076907137}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 119b8c70f444c1f45b3e8ddd20354603, type: 3}
+  m_Script: {fileID: 11500000, guid: 26c46c3bb4db0a447ad1d0222f2c8db8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   towerSkin:
@@ -66,10 +66,10 @@ MonoBehaviour:
   - {fileID: 3893401646320495256, guid: 4001d6e2f1054e74f979e9773eb1e8b0, type: 3}
   arrangeSprite: {fileID: 6236836855029943862}
   firePosition: {fileID: 7434836161347231362}
-  attackRange: 1.5
+  attackRange: 1.8
   attackDamage: 50
   attackRate: 1
-  attackShieldDamageRate: -0.2
+  attackShieldDamageRate: -0.8
   bulletLifeTime: 0.5
   maxAttackCount: 1
   comboAttackCount: 1
@@ -81,6 +81,10 @@ MonoBehaviour:
   isChaos: 0
   isStun: 0
   isPushBack: 0
+  skill1CoolTime: 11
+  skill2CoolTime: 13
+  skill3CoolTime: 16
+  skill4CoolTime: 10
 --- !u!58 &6646438334774418686
 CircleCollider2D:
   m_ObjectHideFlags: 0

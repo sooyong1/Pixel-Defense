@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Doll_Puppet : Tower
+public class Human_Archer : Tower
 {
-
-    /// upgrade
     protected override void SetUpgradeInit()
     {
         SetUpgrade1Function(SetUpgrade_Level1_Type1);
@@ -34,7 +32,7 @@ public class Doll_Puppet : Tower
     {
         //공격범위 증가, 데미지 증가
         AddAttackRange(0.3f);
-        attackDamage += 30;
+        attackDamage += 20;
 
         SetUpgrade1Function(SetUpgrade_Level1_Type1_Elite);
         SetUpgradePrice1(new int[] { 2, 0, 0, 2 });
@@ -48,7 +46,7 @@ public class Doll_Puppet : Tower
     protected override void SetUpgrade_Level1_Type1_Elite()
     {
         //데미지 증가, 공중 공격 가능
-        attackDamage += 15;
+        attackDamage += 20;
         canAttackFly = true;
 
         SetUpgrade1Function(SetUpgrade_Level2_Type1);
@@ -227,7 +225,7 @@ public class Doll_Puppet : Tower
         skillObjScript.SetMaxAttackCount(8);
         skillObjScript.SetComboAttackCount(comboAttackCount);
         skillObjScript.StatusEffect(false, false, false, false, false);
-        
+
     }
 
     protected override void Skill2()
@@ -239,8 +237,8 @@ public class Doll_Puppet : Tower
         anim.SetFloat("AttackSpeed", 5f);
         attackRate = attackRate - 0.5f;
 
-        yield return new WaitForSeconds(3f); 
-        
+        yield return new WaitForSeconds(3f);
+
         anim.SetFloat("AttackSpeed", 1f);
         attackRate = attackRate + 0.5f;
     }
@@ -252,8 +250,8 @@ public class Doll_Puppet : Tower
         GameObject skillObj = Instantiate(towersAllSkill[2], new Vector3(firePosition.position.x, firePosition.position.y, 0), Quaternion.AngleAxis(angle - 90, Vector3.forward));
         Attack_Parent skillObjScript = skillObj.GetComponent<Attack_Parent>();
 
-        skillObjScript.SetMasterTower(this.gameObject);                        
-        skillObjScript.SetMaxAttackCount(5);                
+        skillObjScript.SetMasterTower(this.gameObject);
+        skillObjScript.SetMaxAttackCount(5);
     }
 
     protected override void Skill4()
@@ -261,7 +259,7 @@ public class Doll_Puppet : Tower
         float angle = LookTargetAngle();
 
         GameObject skillObj = Instantiate(towersAllSkill[3], new Vector3(firePosition.position.x, firePosition.position.y, 0), Quaternion.AngleAxis(angle - 90, Vector3.forward));
-        Attack_Parent skillObjScript = skillObj.GetComponent<Attack_Parent>();                 
+        Attack_Parent skillObjScript = skillObj.GetComponent<Attack_Parent>();
 
         skillObjScript.SetMasterTower(this.gameObject);
         skillObjScript.SetDamage((int)(attackDamage * 3f), attackDamage + (int)(attackDamage * attackShieldDamageRate));
@@ -272,6 +270,4 @@ public class Doll_Puppet : Tower
         skillObjScript.StatusEffect(false, false, false, false, false);
 
     }
-
-
 }

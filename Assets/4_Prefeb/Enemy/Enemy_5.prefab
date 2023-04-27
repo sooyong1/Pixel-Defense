@@ -52,7 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cart: {fileID: 1213663812074972233}
   maxHp: 200
-  maxShield: 50
+  maxShield: 100
   giveStone_White: 8
   isFly: 1
   isArmor: 0
@@ -124,6 +124,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1213663812074972232}
     m_Modifications:
+    - target: {fileID: 3103388241993955713, guid: adbabc1653c66a34691c087cccd76c26, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103388241993955713, guid: adbabc1653c66a34691c087cccd76c26, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4134601606073836123, guid: adbabc1653c66a34691c087cccd76c26, type: 3}
       propertyPath: m_Name
       value: Unit012

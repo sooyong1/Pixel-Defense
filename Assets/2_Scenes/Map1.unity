@@ -1899,63 +1899,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 463553175}
   m_CullTransparentMesh: 1
---- !u!1001 &480122755
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3505498975813103869, guid: e8cc84862d648e145aac17fd445114ca, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3505498975813103869, guid: e8cc84862d648e145aac17fd445114ca, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 6.152809
-      objectReference: {fileID: 0}
-    - target: {fileID: 3505498975813103869, guid: e8cc84862d648e145aac17fd445114ca, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.5372137
-      objectReference: {fileID: 0}
-    - target: {fileID: 3505498975813103869, guid: e8cc84862d648e145aac17fd445114ca, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3505498975813103869, guid: e8cc84862d648e145aac17fd445114ca, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3505498975813103869, guid: e8cc84862d648e145aac17fd445114ca, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3505498975813103869, guid: e8cc84862d648e145aac17fd445114ca, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3505498975813103869, guid: e8cc84862d648e145aac17fd445114ca, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3505498975813103869, guid: e8cc84862d648e145aac17fd445114ca, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3505498975813103869, guid: e8cc84862d648e145aac17fd445114ca, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3505498975813103869, guid: e8cc84862d648e145aac17fd445114ca, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3507091086076907137, guid: e8cc84862d648e145aac17fd445114ca, type: 3}
-      propertyPath: m_Name
-      value: Doll_Puppet
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e8cc84862d648e145aac17fd445114ca, type: 3}
 --- !u!1 &507576924
 GameObject:
   m_ObjectHideFlags: 0
@@ -4167,7 +4110,7 @@ Transform:
   - {fileID: 1384562461}
   - {fileID: 1342506890}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &937523955
 GameObject:
@@ -4300,15 +4243,15 @@ MonoBehaviour:
     isUnlock: 0
   - TowerPrefab: {fileID: 3507091086076907137, guid: e8cc84862d648e145aac17fd445114ca, type: 3}
     Arrangement: {fileID: 3507091086076907137, guid: cb4aa6228289161458c14f2954334d98, type: 3}
-    InventoryImage: {fileID: 21300000, guid: 20eb058aea3c3a744bb5d47a1610550a, type: 3}
+    InventoryImage: {fileID: 21300000, guid: 6c91d7c324a5cd14691774355729fd93, type: 3}
     isUnlock: 1
-  - TowerPrefab: {fileID: 3507091086076907137, guid: 41cb43339575e164aa1ad077bb064f75, type: 3}
-    Arrangement: {fileID: 3507091086076907137, guid: bcb56b8edbcd08b49a464d45c268b7fa, type: 3}
-    InventoryImage: {fileID: 21300000, guid: 7db7af78e8f9c45418a407bdd7958560, type: 3}
+  - TowerPrefab: {fileID: 3507091086076907137, guid: 3b7c893be9769684294ecfb0aec8bdff, type: 3}
+    Arrangement: {fileID: 3507091086076907137, guid: 7d7e29bfdab9c244fb39fef98a2cbf64, type: 3}
+    InventoryImage: {fileID: 21300000, guid: 6d883a2fc76fd4137ad47f5150294d01, type: 3}
     isUnlock: 1
-  - TowerPrefab: {fileID: 3507091086076907137, guid: 139cf79a855a05d468a54c003d2278bd, type: 3}
-    Arrangement: {fileID: 3507091086076907137, guid: 90f567157610bb644aeae8f496190ac8, type: 3}
-    InventoryImage: {fileID: 21300000, guid: f082e69f825d0aa44b687e592731c0a8, type: 3}
+  - TowerPrefab: {fileID: 3507091086076907137, guid: 08e4f7cd33110774dbc6b54fc5f5d2a5, type: 3}
+    Arrangement: {fileID: 3507091086076907137, guid: 4347543f5f39ba14cbabda1a063dc628, type: 3}
+    InventoryImage: {fileID: 21300000, guid: ffef52aa2bdb04c1394af5d4599ed210, type: 3}
     isUnlock: 1
 --- !u!1 &991505240
 GameObject:
@@ -13504,7 +13447,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1812070717
 GameObject:

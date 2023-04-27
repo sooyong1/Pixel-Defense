@@ -20,4 +20,5 @@ public class AnimationEventBridge : MonoBehaviour
     {
         tower.CheckLostTarget();
     }
+
 }

@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Doll_Puppet : Tower
+public class Human_Magician : Tower
 {
-
-    /// upgrade
     protected override void SetUpgradeInit()
     {
         SetUpgrade1Function(SetUpgrade_Level1_Type1);
@@ -34,7 +32,7 @@ public class Doll_Puppet : Tower
     {
         //공격범위 증가, 데미지 증가
         AddAttackRange(0.3f);
-        attackDamage += 30;
+        attackDamage += 20;
 
         SetUpgrade1Function(SetUpgrade_Level1_Type1_Elite);
         SetUpgradePrice1(new int[] { 2, 0, 0, 2 });
@@ -47,9 +45,9 @@ public class Doll_Puppet : Tower
 
     protected override void SetUpgrade_Level1_Type1_Elite()
     {
-        //데미지 증가, 공중 공격 가능
-        attackDamage += 15;
-        canAttackFly = true;
+        //실드 공격력 증가, 공속 증가
+        attackShieldDamageRate += 0.5f;
+        attackRate -= 0.2f;
 
         SetUpgrade1Function(SetUpgrade_Level2_Type1);
         SetUpgradePrice1(new int[] { 2, 0, 0, 2 });
@@ -64,10 +62,13 @@ public class Doll_Puppet : Tower
     protected override void SetUpgrade_Level2_Type1()
     {
         ChangeSkin(1);
-        //기본공격 강화, 데미지 증가, 범위 증가
+        //빙결, 최대 5마리, 방사형공격으로 변환, 범위 감소
+        maxAttackCount = 5;
+        SetUsingBulletType(1);
         SetCurrentAttackFunction(UpgradeAttack_Leve2_Tyep1);
-        attackDamage += 50;
-        AddAttackRange(0.3f);
+        isCold = true;
+        AddAttackRange(-0.5f);
+
 
         SetUpgrade1Function(SetUpgrade_Level2_Type1_Elite);
         SetUpgradePrice1(new int[] { 2, 4, 4, 0 });
@@ -81,9 +82,12 @@ public class Doll_Puppet : Tower
     protected override void SetUpgrade_Level2_Type2()
     {
         ChangeSkin(2);
-        //총알 종류 변화, 탄환 최대 공격 가능 수 3
-        SetUsingBulletType(1);
-        maxAttackCount = 3;
+        //공 크기 증가, 화상, 동시공격 5, 공격속도 감소
+        isBurn = true;
+        SetUsingBulletType(2);
+        maxAttackCount = 5;
+        attackRate += 0.5f;
+        bulletLifeTime = 0.7f;
 
         SetUpgrade1Function(SetUpgrade_Level2_Type2_Elite);
         SetUpgradePrice1(new int[] { 2, 0, 4, 4 });
@@ -97,8 +101,8 @@ public class Doll_Puppet : Tower
 
     protected override void SetUpgrade_Level2_Type1_Elite()
     {
-        //공격 속도 증가
-        attackRate -= 0.3f;
+        //공중공격 가능
+        canAttackFly = true;
 
         SetUpgrade1Function(SetUpgrade_Level3_Type1);
         SetUpgradePrice1(new int[] { 2, 4, 4, 0 });
@@ -111,8 +115,8 @@ public class Doll_Puppet : Tower
 
     protected override void SetUpgrade_Level2_Type2_Elite()
     {
-        //아머 적 공격 가능
-        canAttackArmor = true;
+        //공중공격 가능
+        canAttackFly = true;
 
         SetUpgrade1Function(SetUpgrade_Level3_Type3);
         SetUpgradePrice1(new int[] { 2, 0, 4, 4 });
@@ -191,87 +195,38 @@ public class Doll_Puppet : Tower
         SetUpgrade2Info("");
     }
 
+    //Attack Upgrade
 
-    //Default Attack Upgrade
-
-    protected override void UpgradeAttack_Leve2_Tyep1()
+    protected override void UpgradeAttack_Leve2_Tyep1() 
     {
-        float angle = LookTargetAngle();
+        GameObject outbullet = OutPool();
+        outbullet.transform.position = transform.root.position;
 
-        GameObject outbullet1 = OutPool();
-        outbullet1.transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward) * Quaternion.Euler(new Vector3(0, 0, -30));
-        outbullet1.transform.position = firePosition.position;
-
-        GameObject outbullet2 = OutPool();
-        outbullet2.transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
-        outbullet2.transform.position = firePosition.position;
-
-        GameObject outbullet3 = OutPool();
-        outbullet3.transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward) * Quaternion.Euler(new Vector3(0, 0, 30));
-        outbullet3.transform.position = firePosition.position;
     }
+
+
 
     //Skill
     protected override void Skill1()
     {
-        float target_x = target.transform.position.x;
-        float target_y = target.transform.position.y;
 
-        GameObject skillObj = Instantiate(towersAllSkill[0], new Vector3(target_x, target_y, 0), Quaternion.identity);
-        Attack_Parent skillObjScript = skillObj.GetComponent<Attack_Parent>();
 
-        skillObjScript.SetMasterTower(this.gameObject);
-        skillObjScript.SetDamage((int)(attackDamage * 1.5f), attackDamage + (int)(attackDamage * attackShieldDamageRate));
-        skillObjScript.SetCanAttackFly(canAttackFly);
-        skillObjScript.SetCanAttackArmor(canAttackArmor);
-        skillObjScript.SetMaxAttackCount(8);
-        skillObjScript.SetComboAttackCount(comboAttackCount);
-        skillObjScript.StatusEffect(false, false, false, false, false);
-        
     }
 
     protected override void Skill2()
     {
-        StartCoroutine("Skill2_SpeedBuff");
-    }
-    IEnumerator Skill2_SpeedBuff()
-    {
-        anim.SetFloat("AttackSpeed", 5f);
-        attackRate = attackRate - 0.5f;
-
-        yield return new WaitForSeconds(3f); 
         
-        anim.SetFloat("AttackSpeed", 1f);
-        attackRate = attackRate + 0.5f;
     }
+
 
     protected override void Skill3()
     {
-        float angle = LookTargetAngle();
 
-        GameObject skillObj = Instantiate(towersAllSkill[2], new Vector3(firePosition.position.x, firePosition.position.y, 0), Quaternion.AngleAxis(angle - 90, Vector3.forward));
-        Attack_Parent skillObjScript = skillObj.GetComponent<Attack_Parent>();
-
-        skillObjScript.SetMasterTower(this.gameObject);                        
-        skillObjScript.SetMaxAttackCount(5);                
     }
 
     protected override void Skill4()
     {
-        float angle = LookTargetAngle();
 
-        GameObject skillObj = Instantiate(towersAllSkill[3], new Vector3(firePosition.position.x, firePosition.position.y, 0), Quaternion.AngleAxis(angle - 90, Vector3.forward));
-        Attack_Parent skillObjScript = skillObj.GetComponent<Attack_Parent>();                 
-
-        skillObjScript.SetMasterTower(this.gameObject);
-        skillObjScript.SetDamage((int)(attackDamage * 3f), attackDamage + (int)(attackDamage * attackShieldDamageRate));
-        skillObjScript.SetCanAttackFly(canAttackFly);
-        skillObjScript.SetCanAttackArmor(canAttackArmor);
-        skillObjScript.SetMaxAttackCount(8);
-        skillObjScript.SetComboAttackCount(comboAttackCount);
-        skillObjScript.StatusEffect(false, false, false, false, false);
 
     }
-
-
 }
