@@ -22,7 +22,7 @@ namespace Cinemachine
         public GameObject body;
         [HideInInspector] public float originalSpeed;
         [HideInInspector] public bool isStun = false;
-        private bool isPushBack = false;
+        public bool isPushBack = false;
         private float pushBackSpeed = -10f;
 
         void Awake()

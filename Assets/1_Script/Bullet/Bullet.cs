@@ -7,6 +7,7 @@ public class Bullet : Attack_Parent
 
     private float lifeTime = 1f;
     private int bulletType = 0;
+    [SerializeField] private bool autoDeactive_attckCount0 = true;
 
     void OnEnable()
     {
@@ -56,8 +57,8 @@ public class Bullet : Attack_Parent
         maxAttackCount--;
 
         if (maxAttackCount == 0 || (targetEnemy.GetIsArmor() && !canAttackArmor))
-        {
-            Deactivate();
+        {            
+            if(autoDeactive_attckCount0) Deactivate();
         }
     }
 

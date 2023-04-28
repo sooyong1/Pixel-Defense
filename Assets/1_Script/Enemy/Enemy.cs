@@ -52,7 +52,8 @@ public class Enemy : MonoBehaviour
         curShield = maxShield;
         hpBar.SetHpBarRate(1);
         shieldBar.SetHpBarRate(1);
-        ShieldOnOff();        
+        ShieldOnOff();
+        cart.isPushBack = false;
     }
 
     public void SetInitialize()
@@ -66,7 +67,7 @@ public class Enemy : MonoBehaviour
         shieldBar.SetHpBarRate(1);
         ShieldOnOff();
 
-        cart.m_Position = 0;
+        cart.m_Position = 0;        
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -128,7 +129,7 @@ public class Enemy : MonoBehaviour
     }
 
     public void Dead()
-    {
+    {        
         isDead = true;
         GiveStone();
         ReturnPool();

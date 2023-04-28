@@ -7,6 +7,11 @@ public class TowerArrangement : MonoBehaviour
 {
     [SerializeField] private GameObject arrangeSprite;
     [SerializeField] private float attackRange = 0f;
+   
+    private SpriteRenderer arrangeSpriteColor;
+    private Color basicColor = new Color(0,0.6f,1,0.3f);
+    private Color alertColor = new Color(1, 0, 0, 0.3f);
+
     private GameManager gameManager;
     private Vector2 MousePosition;
     private Camera myCamera;
@@ -17,7 +22,9 @@ public class TowerArrangement : MonoBehaviour
     void Awake()
     {
         myCamera = Camera.main;
-        UpdateArrangeSpriteSize();
+        UpdateArrangeSpriteSize();        
+        arrangeSpriteColor = arrangeSprite.GetComponent<SpriteRenderer>();
+        arrangeSpriteColor.color = basicColor;
     }
 
     void Update()
@@ -26,12 +33,15 @@ public class TowerArrangement : MonoBehaviour
         MousePosition = myCamera.ScreenToWorldPoint(MousePosition);
         transform.position = MousePosition;
 
+        if (EventSystem.current.IsPointerOverGameObject() || CollisionTowerCount != 0) arrangeSpriteColor.color = alertColor;
+        else arrangeSpriteColor.color = basicColor;
+
         BuildTower();
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Tower"))
+        if(other.CompareTag("Tower") || other.CompareTag("Track"))
         {
             CollisionTowerCount++;
         }        
@@ -39,7 +49,7 @@ public class TowerArrangement : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Tower"))
+        if (other.CompareTag("Tower") || other.CompareTag("Track"))
         {
             CollisionTowerCount--;
         }        

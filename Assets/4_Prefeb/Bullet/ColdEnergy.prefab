@@ -143,6 +143,7 @@ MonoBehaviour:
   isChaos: 0
   isStun: 0
   isPushBack: 0
+  autoDeactive_attckCount0: 0
 --- !u!114 &5778508773869262207
 MonoBehaviour:
   m_ObjectHideFlags: 0
