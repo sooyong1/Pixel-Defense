@@ -12,7 +12,7 @@ public class Human_Magician : Tower
         SetUpgradePrice1(new int[] { 2, 0, 0, 0 });
         SetUpgradePrice2(new int[] { 0, 0, 0, 0 });
 
-        SetUpgrade1Info("Doll Can Attack Flying Enemy.");
+        SetUpgrade1Info("Increase attack range.");
         SetUpgrade2Info("");
     }
 
@@ -36,7 +36,7 @@ public class Human_Magician : Tower
 
         SetUpgrade1Function(SetUpgrade_Level1_Type1_Elite);
         SetUpgradePrice1(new int[] { 2, 0, 0, 2 });
-        SetUpgrade1Info("Increase attack speed.");
+        SetUpgrade1Info("Increase shield damage.");
 
         SetUpgrade2Function(null);
         SetUpgradePrice2(new int[] { 0, 0, 0, 0 });
@@ -51,11 +51,11 @@ public class Human_Magician : Tower
 
         SetUpgrade1Function(SetUpgrade_Level2_Type1);
         SetUpgradePrice1(new int[] { 2, 0, 0, 2 });
-        SetUpgrade1Info("Increase attack speed.");
+        SetUpgrade1Info("Magician freezes the surroundings.");
 
         SetUpgrade2Function(SetUpgrade_Level2_Type2);
         SetUpgradePrice2(new int[] { 0, 2, 0, 2 });
-        SetUpgrade2Info("a");
+        SetUpgrade2Info("Magician make fire ball.");
     }
 
     /// Level 2
@@ -72,7 +72,7 @@ public class Human_Magician : Tower
 
         SetUpgrade1Function(SetUpgrade_Level2_Type1_Elite);
         SetUpgradePrice1(new int[] { 2, 4, 4, 0 });
-        SetUpgrade1Info("12");
+        SetUpgrade1Info("Magician can attack flying enemies.");
 
         SetUpgrade2Function(null);
         SetUpgradePrice2(new int[] { 0, 0, 0, 0 });
@@ -91,7 +91,7 @@ public class Human_Magician : Tower
 
         SetUpgrade1Function(SetUpgrade_Level2_Type2_Elite);
         SetUpgradePrice1(new int[] { 2, 0, 4, 4 });
-        SetUpgrade1Info("elite");
+        SetUpgrade1Info("Magician can attack flying enemies.");
 
         SetUpgrade2Function(null);
         SetUpgradePrice2(new int[] { 0, 0, 0, 0 });
@@ -106,11 +106,11 @@ public class Human_Magician : Tower
 
         SetUpgrade1Function(SetUpgrade_Level3_Type1);
         SetUpgradePrice1(new int[] { 2, 4, 4, 0 });
-        SetUpgrade1Info("ty");
+        SetUpgrade1Info("Skill : ");
 
         SetUpgrade2Function(SetUpgrade_Level3_Type2);
         SetUpgradePrice2(new int[] { 2, 4, 4, 0 });
-        SetUpgrade2Info("yt");
+        SetUpgrade2Info("Skill :");
     }
 
     protected override void SetUpgrade_Level2_Type2_Elite()
@@ -120,11 +120,11 @@ public class Human_Magician : Tower
 
         SetUpgrade1Function(SetUpgrade_Level3_Type3);
         SetUpgradePrice1(new int[] { 2, 0, 4, 4 });
-        SetUpgrade1Info("nw");
+        SetUpgrade1Info("Skill :");
 
         SetUpgrade2Function(SetUpgrade_Level3_Type4);
         SetUpgradePrice2(new int[] { 2, 4, 0, 4 });
-        SetUpgrade2Info("t,");
+        SetUpgrade2Info("Skill :");
     }
 
 
