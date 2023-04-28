@@ -43,7 +43,7 @@ public class SpriteAnimation : MonoBehaviour
         {            
             if (!Loop)
             {                
-                if (autoDestroy) Destroy(transform.parent.root.gameObject);
+                if (autoDestroy) Destroy(transform.root.gameObject);
                 
                 return;
             }

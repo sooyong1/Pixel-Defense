@@ -162,8 +162,7 @@ public class Human_Worrior : Tower
     {
         ChangeSkin(5);
 
-        SetSkill(Skill3, skill3CoolTime);
-        isSkillReady = true;
+        SetCurrentAttackFunction(UpgradeAttack_Leve3_Tyep3);
 
         SetUpgrade1Function(null);
         SetUpgradePrice1(new int[] { 0, 0, 0, 0 });
@@ -193,12 +192,37 @@ public class Human_Worrior : Tower
 
     //Default Attack Upgrade
 
+    protected override void UpgradeAttack_Leve3_Tyep3() 
+    {
+        int skillPercnet = 2;
 
+        if(Random.Range(1,10) <= skillPercnet)
+        {
+            Skill3();
+        }
+        else
+        {
+            float angle = LookTargetAngle();
+
+            GameObject outbullet = OutPool();
+            outbullet.transform.position = firePosition.position;
+            outbullet.transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+        }        
+    }
 
     //Skill
     protected override void Skill1()
-    {
+    {        
+        GameObject skillObj = Instantiate(towersAllSkill[0], new Vector3(transform.root.position.x, transform.root.position.y, 0), Quaternion.identity);
+        Attack_Parent skillObjScript = skillObj.GetComponent<Attack_Parent>();
 
+        skillObjScript.SetMasterTower(this.gameObject);
+        skillObjScript.SetDamage(attackDamage, attackDamage + (int)(attackDamage * attackShieldDamageRate));
+        skillObjScript.SetCanAttackFly(canAttackFly);
+        skillObjScript.SetCanAttackArmor(canAttackArmor);
+        skillObjScript.SetMaxAttackCount(8);
+        skillObjScript.SetComboAttackCount(comboAttackCount);
+        skillObjScript.StatusEffect(false, false, false, true, false);        
 
     }
 
@@ -210,7 +234,17 @@ public class Human_Worrior : Tower
 
     protected override void Skill3()
     {
+        GameObject skillObj = Instantiate(towersAllSkill[2], new Vector3(transform.root.position.x, transform.root.position.y, 0), Quaternion.identity);
+        StrongAttack skillObjScript = skillObj.GetComponent<StrongAttack>();
 
+        skillObjScript.SetMasterTower(this.gameObject);
+        skillObjScript.SetDamage(attackDamage * 5, (attackDamage * 5) + (int)((attackDamage * 5) * attackShieldDamageRate));
+        skillObjScript.SetCanAttackFly(canAttackFly);
+        skillObjScript.SetCanAttackArmor(canAttackArmor);
+        skillObjScript.SetMaxAttackCount(1);
+        skillObjScript.SetComboAttackCount(1);
+
+        skillObjScript.EnemyDamage(target.GetComponent<Enemy>());
     }
 
     protected override void Skill4()

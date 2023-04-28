@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3893401646320495254}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!212 &6873275429235838676
 SpriteRenderer:
@@ -84,6 +84,54 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &2001017971985370255
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 616738056584210550}
+  - component: {fileID: 890468850405143853}
+  m_Layer: 8
+  m_Name: BombAttackArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &616738056584210550
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2001017971985370255}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3893401646320495254}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &890468850405143853
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2001017971985370255}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.2}
+  serializedVersion: 2
+  m_Radius: 1.4
 --- !u!1 &3893401646320495256
 GameObject:
   m_ObjectHideFlags: 0
@@ -96,7 +144,7 @@ GameObject:
   - component: {fileID: 3893401646320495252}
   - component: {fileID: 4630688499238619424}
   - component: {fileID: 3977483679801194406}
-  - component: {fileID: 7897851394214871886}
+  - component: {fileID: 5927338998720148966}
   m_Layer: 8
   m_Name: Skill_ArrowBomb
   m_TagString: bullet
@@ -116,6 +164,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 616738056584210550}
   - {fileID: 2092512103167411761}
   - {fileID: 5791950674966610280}
   m_Father: {fileID: 0}
@@ -186,11 +235,11 @@ MonoBehaviour:
   isStun: 0
   isPushBack: 0
   attackArea: {fileID: 4630688499238619424}
-  explosionArea: {fileID: 7897851394214871886}
+  explosionArea: {fileID: 5927338998720148966}
   explosionEffect: {fileID: 5791950674966610281}
   arrow: {fileID: 1725912766717768103}
   goForward: {fileID: 3893401646320495252}
---- !u!58 &7897851394214871886
+--- !u!58 &5927338998720148966
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -200,7 +249,7 @@ CircleCollider2D:
   m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.2}
@@ -215,7 +264,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7104406813971905470, guid: effc0a6c1eb69ab49b411674d4698adb, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7104406813971905470, guid: effc0a6c1eb69ab49b411674d4698adb, type: 3}
       propertyPath: m_LocalPosition.x

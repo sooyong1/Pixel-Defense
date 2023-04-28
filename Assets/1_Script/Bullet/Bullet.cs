@@ -8,6 +8,7 @@ public class Bullet : Attack_Parent
     private float lifeTime = 1f;
     private int bulletType = 0;
     [SerializeField] private bool autoDeactive_attckCount0 = true;
+    [SerializeField] private bool isUsePool = true;
 
     void OnEnable()
     {
@@ -17,8 +18,8 @@ public class Bullet : Attack_Parent
     IEnumerator RunLifeTime()
     {
         yield return new WaitForSeconds(lifeTime);
-
-        Deactivate();
+        if (!isUsePool) Destroy(transform.root.gameObject);
+        else Deactivate();
     }
 
     void ReturnPool()
@@ -57,8 +58,8 @@ public class Bullet : Attack_Parent
         maxAttackCount--;
 
         if (maxAttackCount == 0 || (targetEnemy.GetIsArmor() && !canAttackArmor))
-        {            
-            if(autoDeactive_attckCount0) Deactivate();
+        {                        
+            if (autoDeactive_attckCount0) Deactivate();
         }
     }
 

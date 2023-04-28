@@ -60,10 +60,10 @@ MonoBehaviour:
   - {fileID: 3893401646320495256, guid: d267cee086d861c489031170daaed916, type: 3}
   - {fileID: 3893401646320495256, guid: c6969c8268c46cf408f611c4d07dd781, type: 3}
   towersAllSkill:
-  - {fileID: 896614283024788229, guid: 6bbc223d4a869da46bf4bd562ad3e301, type: 3}
+  - {fileID: 3893401646320495256, guid: f86604e5ea58fb24f94c36d884f4132b, type: 3}
   - {fileID: 0}
-  - {fileID: 3893401646320495256, guid: 11780ec00fa74c1499b4765197ed673c, type: 3}
-  - {fileID: 3893401646320495256, guid: 4001d6e2f1054e74f979e9773eb1e8b0, type: 3}
+  - {fileID: 3893401646320495256, guid: ade2c896d6d663b46bb24c37a8f39725, type: 3}
+  - {fileID: 0}
   arrangeSprite: {fileID: 6236836855029943862}
   firePosition: {fileID: 7434836161347231362}
   attackRange: 1.2
