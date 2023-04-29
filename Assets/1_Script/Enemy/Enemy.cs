@@ -31,6 +31,8 @@ public class Enemy : MonoBehaviour
     private int enemyID = 1;
     private EnemyManager enemyManager;
 
+    [SerializeField] private bool powerOverwhelming = false;
+
     //private bool isCold = false;
     //private bool isBurn = false;
     //private bool isStun = false;
@@ -125,7 +127,7 @@ public class Enemy : MonoBehaviour
 
     public void Damage(int damage, int comboAttackCount = 1, float damageDecreaseRate = 1)
     {
-        StartCoroutine(DamageCoroutine(damage, comboAttackCount, damageDecreaseRate));
+        if(!powerOverwhelming) StartCoroutine(DamageCoroutine(damage, comboAttackCount, damageDecreaseRate));
     }
 
     public void Dead()

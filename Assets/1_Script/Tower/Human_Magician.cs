@@ -9,7 +9,7 @@ public class Human_Magician : Tower
         SetUpgrade1Function(SetUpgrade_Level1_Type1);
         SetUpgrade2Function(null);
 
-        SetUpgradePrice1(new int[] { 2, 0, 0, 0 });
+        SetUpgradePrice1(new int[] { 0, 0, 2, 0 });
         SetUpgradePrice2(new int[] { 0, 0, 0, 0 });
 
         SetUpgrade1Info("Increase attack range.");
@@ -35,7 +35,7 @@ public class Human_Magician : Tower
         attackDamage += 20;
 
         SetUpgrade1Function(SetUpgrade_Level1_Type1_Elite);
-        SetUpgradePrice1(new int[] { 2, 0, 0, 2 });
+        SetUpgradePrice1(new int[] { 0, 0, 2, 2 });
         SetUpgrade1Info("Increase shield damage.");
 
         SetUpgrade2Function(null);
@@ -48,13 +48,14 @@ public class Human_Magician : Tower
         //실드 공격력 증가, 공속 증가
         attackShieldDamageRate += 0.5f;
         attackRate -= 0.2f;
+        attackDamage += 30;
 
         SetUpgrade1Function(SetUpgrade_Level2_Type1);
-        SetUpgradePrice1(new int[] { 2, 0, 0, 2 });
+        SetUpgradePrice1(new int[] { 1, 1, 4, 0 });
         SetUpgrade1Info("Magician freezes the surroundings.");
 
         SetUpgrade2Function(SetUpgrade_Level2_Type2);
-        SetUpgradePrice2(new int[] { 0, 2, 0, 2 });
+        SetUpgradePrice2(new int[] { 0, 1, 4, 1 });
         SetUpgrade2Info("Magician make fire ball.");
     }
 
@@ -68,6 +69,7 @@ public class Human_Magician : Tower
         SetCurrentAttackFunction(UpgradeAttack_Leve2_Tyep1);
         isCold = true;
         AddAttackRange(-0.5f);
+        attackDamage += 40;
 
 
         SetUpgrade1Function(SetUpgrade_Level2_Type1_Elite);
@@ -88,9 +90,10 @@ public class Human_Magician : Tower
         maxAttackCount = 5;
         attackRate += 0.5f;
         bulletLifeTime = 0.7f;
+        attackDamage += 50;
 
         SetUpgrade1Function(SetUpgrade_Level2_Type2_Elite);
-        SetUpgradePrice1(new int[] { 2, 0, 4, 4 });
+        SetUpgradePrice1(new int[] { 2, 2, 4, 2 });
         SetUpgrade1Info("Magician can attack flying enemies.");
 
         SetUpgrade2Function(null);
@@ -103,13 +106,14 @@ public class Human_Magician : Tower
     {
         //공중공격 가능
         canAttackFly = true;
+        attackDamage += 60;
 
         SetUpgrade1Function(SetUpgrade_Level3_Type1);
-        SetUpgradePrice1(new int[] { 2, 4, 4, 0 });
+        SetUpgradePrice1(new int[] { 4, 0, 6, 6 });
         SetUpgrade1Info("Skill : ");
 
         SetUpgrade2Function(SetUpgrade_Level3_Type2);
-        SetUpgradePrice2(new int[] { 2, 4, 4, 0 });
+        SetUpgradePrice2(new int[] { 0, 6, 6, 4 });
         SetUpgrade2Info("Skill :");
     }
 
@@ -117,13 +121,14 @@ public class Human_Magician : Tower
     {
         //공중공격 가능
         canAttackFly = true;
+        attackDamage += 60;
 
         SetUpgrade1Function(SetUpgrade_Level3_Type3);
-        SetUpgradePrice1(new int[] { 2, 0, 4, 4 });
+        SetUpgradePrice1(new int[] { 6, 2, 6, 2 });
         SetUpgrade1Info("Skill :");
 
         SetUpgrade2Function(SetUpgrade_Level3_Type4);
-        SetUpgradePrice2(new int[] { 2, 4, 0, 4 });
+        SetUpgradePrice2(new int[] { 3, 3, 6, 4 });
         SetUpgrade2Info("Skill :");
     }
 

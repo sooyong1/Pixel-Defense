@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private int stone_White = 150;
     [SerializeField] private Text stone_White_txt;
-    private int[] stone_Color = { 100, 100, 100, 100 }; //red green blue yellow
+    private int[] stone_Color = { 0, 0, 0, 0 }; //red green blue yellow
     [SerializeField] private Text[] stone_Color_txt;
     [SerializeField] private Text[] stone_Upgrade1Price_txt;
     [SerializeField] private Text[] stone_Upgrade2Price_txt;
@@ -44,8 +44,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Text upgrade1_InfoTxt;
     [SerializeField] private Text upgrade2_InfoTxt;
 
-    private int makeDollPrice = 50;
-    private int makeColorStonePrice = 100;
+    private int makeDollPrice = 30;
+    private int makeColorStonePrice = 50;
 
     [SerializeField] private Text waveSpeed_txt;
 
@@ -286,7 +286,7 @@ public class GameManager : MonoBehaviour
 
     public void AddStone_White(int value)
     {
-        stone_White += value;
+        stone_White += value + (waveCount/2);
         UpdateStoneCountTxt_White();
     }
 

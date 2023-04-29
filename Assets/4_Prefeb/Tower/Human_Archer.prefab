@@ -69,7 +69,7 @@ MonoBehaviour:
   attackRange: 1.8
   attackDamage: 50
   attackRate: 1
-  attackShieldDamageRate: -0.8
+  attackShieldDamageRate: -0.5
   bulletLifeTime: 0.5
   maxAttackCount: 1
   comboAttackCount: 1

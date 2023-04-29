@@ -9,10 +9,10 @@ public class Human_Archer : Tower
         SetUpgrade1Function(SetUpgrade_Level1_Type1);
         SetUpgrade2Function(null);
 
-        SetUpgradePrice1(new int[] { 2, 0, 0, 0 });
+        SetUpgradePrice1(new int[] { 0, 2, 0, 0 });
         SetUpgradePrice2(new int[] { 0, 0, 0, 0 });
 
-        SetUpgrade1Info("Increases attack range.");
+        SetUpgrade1Info("Archer can attack flying enemy.");
         SetUpgrade2Info("");
     }
 
@@ -30,13 +30,13 @@ public class Human_Archer : Tower
 
     protected override void SetUpgrade_Level1_Type1()
     {
-        //공격범위 증가, 데미지 증가
-        AddAttackRange(0.3f);
+        //공격범위 증가, 데미지 증가        
+        canAttackFly = true;
         attackDamage += 20;
 
         SetUpgrade1Function(SetUpgrade_Level1_Type1_Elite);
-        SetUpgradePrice1(new int[] { 2, 0, 0, 2 });
-        SetUpgrade1Info("Archer can attack flying enemy.");
+        SetUpgradePrice1(new int[] { 0, 2, 2, 0 });
+        SetUpgrade1Info("Increases attack range.");
 
         SetUpgrade2Function(null);
         SetUpgradePrice2(new int[] { 0, 0, 0, 0 });
@@ -46,16 +46,16 @@ public class Human_Archer : Tower
     protected override void SetUpgrade_Level1_Type1_Elite()
     {
         //데미지 증가, 공중 공격 가능
-        attackDamage += 20;
-        canAttackFly = true;
+        attackDamage += 40;
+        AddAttackRange(0.3f);
 
         SetUpgrade1Function(SetUpgrade_Level2_Type1);
-        SetUpgradePrice1(new int[] { 2, 0, 0, 2 });
+        SetUpgradePrice1(new int[] { 2, 4, 0, 2 });
         SetUpgrade1Info("Archer shoots three arrows.");
 
         SetUpgrade2Function(SetUpgrade_Level2_Type2);
-        SetUpgradePrice2(new int[] { 0, 2, 0, 2 });
-        SetUpgrade2Info("Arrow pierces the enemy.");
+        SetUpgradePrice2(new int[] { 0, 4, 2, 2 });
+        SetUpgrade2Info("Arrow pierces armor.\n Arrow pierces enemies");
     }
 
     /// Level 2
@@ -64,11 +64,11 @@ public class Human_Archer : Tower
         ChangeSkin(1);
         //기본공격 강화, 데미지 증가, 범위 증가
         SetCurrentAttackFunction(UpgradeAttack_Leve2_Tyep1);
-        attackDamage += 50;
+        attackDamage += 40;
         AddAttackRange(0.3f);
 
         SetUpgrade1Function(SetUpgrade_Level2_Type1_Elite);
-        SetUpgradePrice1(new int[] { 2, 4, 4, 0 });
+        SetUpgradePrice1(new int[] { 0, 4, 4, 2 });
         SetUpgrade1Info("Increases attack speed.");
 
         SetUpgrade2Function(null);
@@ -82,10 +82,12 @@ public class Human_Archer : Tower
         //총알 종류 변화, 탄환 최대 공격 가능 수 3
         SetUsingBulletType(1);
         maxAttackCount = 3;
+        canAttackArmor = true;
+        attackDamage += 40;
 
         SetUpgrade1Function(SetUpgrade_Level2_Type2_Elite);
-        SetUpgradePrice1(new int[] { 2, 0, 4, 4 });
-        SetUpgrade1Info("Arrow pierces armor.");
+        SetUpgradePrice1(new int[] { 0, 4, 2, 4 });
+        SetUpgrade1Info("Increase damage.");
 
         SetUpgrade2Function(null);
         SetUpgradePrice2(new int[] { 0, 0, 0, 0 });
@@ -97,27 +99,29 @@ public class Human_Archer : Tower
     {
         //공격 속도 증가
         attackRate -= 0.3f;
+        attackDamage += 50;
 
         SetUpgrade1Function(SetUpgrade_Level3_Type1);
-        SetUpgradePrice1(new int[] { 2, 4, 4, 0 });
+        SetUpgradePrice1(new int[] { 4, 6, 6, 0 });
         SetUpgrade1Info("Skill : Arrow rain");
 
         SetUpgrade2Function(SetUpgrade_Level3_Type2);
-        SetUpgradePrice2(new int[] { 2, 4, 4, 0 });
+        SetUpgradePrice2(new int[] { 0, 6, 4, 6 });
         SetUpgrade2Info("Skill : Adrenaline");
     }
 
     protected override void SetUpgrade_Level2_Type2_Elite()
     {
         //아머 적 공격 가능
-        canAttackArmor = true;
+        
+        attackDamage += 70;
 
         SetUpgrade1Function(SetUpgrade_Level3_Type3);
-        SetUpgradePrice1(new int[] { 2, 0, 4, 4 });
+        SetUpgradePrice1(new int[] { 3, 6, 3, 4 });
         SetUpgrade1Info("Skill : One shot multiple kill");
 
         SetUpgrade2Function(SetUpgrade_Level3_Type4);
-        SetUpgradePrice2(new int[] { 2, 4, 0, 4 });
+        SetUpgradePrice2(new int[] { 6, 6, 2, 2 });
         SetUpgrade2Info("Skill : Arrow bomb");
     }
 

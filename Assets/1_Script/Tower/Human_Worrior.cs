@@ -47,13 +47,14 @@ public class Human_Worrior : Tower
         //공격범위 증가, 아머 공격 가능
         canAttackArmor = true;
         AddAttackRange(0.3f);
+        attackDamage += 20;
 
         SetUpgrade1Function(SetUpgrade_Level2_Type1);
-        SetUpgradePrice1(new int[] { 2, 0, 0, 2 });
+        SetUpgradePrice1(new int[] { 4, 0, 0, 2 });
         SetUpgrade1Info("Hit many times with one attack.");
 
         SetUpgrade2Function(SetUpgrade_Level2_Type2);
-        SetUpgradePrice2(new int[] { 0, 2, 0, 2 });
+        SetUpgradePrice2(new int[] { 4, 2, 0, 0 });
         SetUpgrade2Info("Push enemies.");
     }
 
@@ -65,9 +66,10 @@ public class Human_Worrior : Tower
         //한번의 공격으로 여러번 타격
         attackDamage = (int)(attackDamage / 3);
         comboAttackCount = 5;
+        maxAttackCount = 2;
 
         SetUpgrade1Function(SetUpgrade_Level2_Type1_Elite);
-        SetUpgradePrice1(new int[] { 2, 4, 4, 0 });
+        SetUpgradePrice1(new int[] { 4, 0, 4, 2 });
         SetUpgrade1Info("Increase attack range.");
 
         SetUpgrade2Function(null);
@@ -80,10 +82,12 @@ public class Human_Worrior : Tower
         ChangeSkin(2);
 
         //공격시 뒤로 밀리게함.
-        isPushBack = true;        
-        
+        isPushBack = true;
+        attackDamage += 70;
+        maxAttackCount = 2;
+
         SetUpgrade1Function(SetUpgrade_Level2_Type2_Elite);
-        SetUpgradePrice1(new int[] { 2, 0, 4, 4 });
+        SetUpgradePrice1(new int[] { 4, 4, 0, 2 });
         SetUpgrade1Info("Sword aura pierces the enemy.");
 
         SetUpgrade2Function(null);
@@ -96,14 +100,14 @@ public class Human_Worrior : Tower
     {
         //공격범위 증가
         AddAttackRange(1f);
-        attackDamage += 7;
+        attackDamage += 10;        
 
         SetUpgrade1Function(SetUpgrade_Level3_Type1);
-        SetUpgradePrice1(new int[] { 2, 4, 4, 0 });
+        SetUpgradePrice1(new int[] { 6, 6, 0, 4 });
         SetUpgrade1Info("Skill : Shouting");
 
         SetUpgrade2Function(SetUpgrade_Level3_Type2);
-        SetUpgradePrice2(new int[] { 2, 4, 4, 0 });
+        SetUpgradePrice2(new int[] { 6, 0, 6, 4 });
         SetUpgrade2Info("Skill : ");
     }
 
@@ -111,14 +115,14 @@ public class Human_Worrior : Tower
     {
         //최대 동시공격 3
         maxAttackCount = 3;
-        attackDamage += 15;
+        attackDamage += 50;
 
         SetUpgrade1Function(SetUpgrade_Level3_Type3);
-        SetUpgradePrice1(new int[] { 2, 0, 4, 4 });
+        SetUpgradePrice1(new int[] { 6, 2, 2, 6 });
         SetUpgrade1Info("Skill : Power strike");
 
         SetUpgrade2Function(SetUpgrade_Level3_Type4);
-        SetUpgradePrice2(new int[] { 2, 4, 0, 4 });
+        SetUpgradePrice2(new int[] { 6, 3, 3, 4 });
         SetUpgrade2Info("Skill : ");
     }
 
@@ -194,7 +198,7 @@ public class Human_Worrior : Tower
 
     protected override void UpgradeAttack_Leve3_Tyep3() 
     {
-        int skillPercnet = 2;
+        int skillPercnet = 3;
 
         if(Random.Range(1,10) <= skillPercnet)
         {

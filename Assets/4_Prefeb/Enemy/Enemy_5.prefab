@@ -52,7 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cart: {fileID: 1213663812074972233}
   maxHp: 200
-  maxShield: 50
+  maxShield: 10
   giveStone_White: 8
   isFly: 1
   isArmor: 0
@@ -76,6 +76,7 @@ MonoBehaviour:
   body: {fileID: 3656316070208752999}
   originalSpeed: 0
   isStun: 0
+  isPushBack: 0
   m_UpdateMethod: 0
   m_PositionUnits: 1
   m_Speed: 1.5
