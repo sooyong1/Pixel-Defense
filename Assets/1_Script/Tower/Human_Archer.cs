@@ -98,7 +98,7 @@ public class Human_Archer : Tower
     protected override void SetUpgrade_Level2_Type1_Elite()
     {
         //공격 속도 증가
-        attackRate -= 0.3f;
+        AddAttackRate(-0.3f);
         attackDamage += 50;
 
         SetUpgrade1Function(SetUpgrade_Level3_Type1);
@@ -238,13 +238,14 @@ public class Human_Archer : Tower
     }
     IEnumerator Skill2_SpeedBuff()
     {
+        float temp = attackRate;
         anim.SetFloat("AttackSpeed", 5f);
-        attackRate = attackRate - 0.5f;
+        SetAttackRate(0.1f);
 
         yield return new WaitForSeconds(3f);
 
         anim.SetFloat("AttackSpeed", 1f);
-        attackRate = attackRate + 0.5f;
+        SetAttackRate(temp);
     }
 
     protected override void Skill3()

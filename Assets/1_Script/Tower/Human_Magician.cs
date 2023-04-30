@@ -47,7 +47,7 @@ public class Human_Magician : Tower
     {
         //실드 공격력 증가, 공속 증가
         attackShieldDamageRate += 0.5f;
-        attackRate -= 0.2f;
+        AddAttackRate(-0.2f);
         attackDamage += 30;
 
         SetUpgrade1Function(SetUpgrade_Level2_Type1);
@@ -88,7 +88,7 @@ public class Human_Magician : Tower
         isBurn = true;
         SetUsingBulletType(2);
         maxAttackCount = 5;
-        attackRate += 0.5f;
+        AddAttackRate(0.5f);
         bulletLifeTime = 0.7f;
         attackDamage += 50;
 

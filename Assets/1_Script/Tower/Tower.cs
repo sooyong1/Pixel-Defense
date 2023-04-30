@@ -61,7 +61,7 @@ public class Tower : MonoBehaviour
     protected string upgrade1_Info = "";
     protected string upgrade2_Info = "";
 
-    
+    private WaitForSeconds coroutineAttackRate;
 
     private Queue<GameObject> bulletPool = new Queue<GameObject>();
 
@@ -70,6 +70,7 @@ public class Tower : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         enemyManager = GameObject.FindWithTag("EnemyManager").GetComponent<EnemyManager>();
         bullet = towersAllBullet[usingBulletType];
+        coroutineAttackRate = new WaitForSeconds(attackRate);
 
         UpdateArrangeSpriteSize();
 
@@ -94,7 +95,7 @@ public class Tower : MonoBehaviour
             else transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
 
             anim.SetTrigger("Attack");            
-            yield return new WaitForSeconds(attackRate);
+            yield return coroutineAttackRate;
         }
         
         target = null;
@@ -207,6 +208,21 @@ public class Tower : MonoBehaviour
         attackRange += value;
         UpdateArrangeSpriteSize();
     }
+
+    public void AddAttackRate(float value)
+    {
+        attackRate += value;
+        if (attackRate < 0) attackRate = 0;
+        coroutineAttackRate = new WaitForSeconds(attackRate);
+    }
+
+    public void SetAttackRate(float value)
+    {
+        attackRate = value;
+        if (attackRate < 0) attackRate = 0;
+        coroutineAttackRate = new WaitForSeconds(attackRate);
+    }
+
     /// ===============
     public float LookTargetAngle()
     {
@@ -294,6 +310,7 @@ public class Tower : MonoBehaviour
         }
         return true;
     }
+    
 
 
     protected void SetCurrentAttackFunction(Callback cal)
