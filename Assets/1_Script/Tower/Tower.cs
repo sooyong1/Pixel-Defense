@@ -75,6 +75,8 @@ public class Tower : MonoBehaviour
         UpdateArrangeSpriteSize();
 
         if (attackShieldDamageRate < -1) attackShieldDamageRate = -1;
+
+        Debug.Log("here");
     }
 
     void Start()
@@ -113,10 +115,11 @@ public class Tower : MonoBehaviour
 
             foreach(GameObject temp in enemyManager.enemyInTrack)
             {
-                bool canAttackFlyingEnemy = (temp.GetComponent<Enemy>().GetIsFly() && canAttackFly) || !temp.GetComponent<Enemy>().GetIsFly();
+                Enemy tempEnemy = temp.GetComponent<Enemy>();
+                bool canAttackFlyingEnemy = (tempEnemy.GetIsFly() && canAttackFly) || !tempEnemy.GetIsFly();
                 
                 float dis = Vector3.Distance(transform.position, temp.transform.position);
-                if (minDis > dis && dis <= attackRange && canAttackFlyingEnemy)
+                if (minDis > dis && dis <= attackRange && canAttackFlyingEnemy && !tempEnemy.GetIsDead())
                 {
                     minDis = dis;
                     targetEnemy = temp;
@@ -302,7 +305,7 @@ public class Tower : MonoBehaviour
 
     public bool CheckLostTarget()
     {
-        if (target == null || target.transform.position.y == 100)
+        if (target == null || target.transform.position.y > 95 || target.GetComponent<Enemy>().GetIsDead())
         {
             target = null;
             ChangeState(State.Search);

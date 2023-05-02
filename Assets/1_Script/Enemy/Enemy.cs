@@ -24,14 +24,20 @@ public class Enemy : MonoBehaviour
     private int curShield;
     [Header(" ")]
     [SerializeField] private HpBar hpBar;
+    [SerializeField] private GameObject hpBarObj;
     [SerializeField] private HpBar shieldBar;
     [SerializeField] private GameObject shieldBarObj;
     private Spawner spawner;
     private bool isDead = false;
     private int enemyID = 1;
     private EnemyManager enemyManager;
+    private Collider2D collisionArea;
 
+    [SerializeField] private GameObject hitEffect;
+    private Vector3 hitEffectPosition;
+    
     [SerializeField] private bool powerOverwhelming = false;
+    public Animator anim;
 
     //private bool isCold = false;
     //private bool isBurn = false;
@@ -41,11 +47,14 @@ public class Enemy : MonoBehaviour
     void Awake()
     {
         cart = GetComponent<ReviseCartCode>();
+        collisionArea = GetComponentInChildren<Collider2D>();
         curHp = maxHp;
         curShield = maxShield;
         initMaxHp = maxHp;
         initMaxShield = maxShield;
         ShieldOnOff();
+        hitEffectPosition = hitEffect.transform.localPosition;
+
     }
 
     void OnDisable()
@@ -55,7 +64,10 @@ public class Enemy : MonoBehaviour
         hpBar.SetHpBarRate(1);
         shieldBar.SetHpBarRate(1);
         ShieldOnOff();
+        collisionArea.enabled = true;
         cart.isPushBack = false;
+
+        anim.SetTrigger("Run");
     }
 
     public void SetInitialize()
@@ -63,12 +75,15 @@ public class Enemy : MonoBehaviour
         maxHp = initMaxHp + (int)(initMaxHp * 0.02f * (gameManager.waveCount - 1));
         maxShield = initMaxShield + (int)(initMaxShield * 0.15f * gameManager.waveCount);
 
+        hpBarObj.SetActive(true);
+
         curHp = maxHp;
         curShield = maxShield;
         hpBar.SetHpBarRate(1);
         shieldBar.SetHpBarRate(1);
         ShieldOnOff();
 
+        isDead = false;
         cart.m_Position = 0;        
     }
 
@@ -105,6 +120,7 @@ public class Enemy : MonoBehaviour
                     shieldBarObj.SetActive(false);
                 }
 
+                HitAnimation();
             }
             else
             {
@@ -113,9 +129,11 @@ public class Enemy : MonoBehaviour
 
                 hpBar.SetHpBarRate((float)curHp / maxHp);
 
+                HitAnimation();
+
                 if (curHp <= 0)
                 {
-                    Dead();
+                    DeadWork();
                 }
             }
 
@@ -128,13 +146,34 @@ public class Enemy : MonoBehaviour
     public void Damage(int damage, int comboAttackCount = 1, float damageDecreaseRate = 1)
     {
         if(!powerOverwhelming) StartCoroutine(DamageCoroutine(damage, comboAttackCount, damageDecreaseRate));
-    }
+    }    
 
-    public void Dead()
+    public void Dead()  //몬스터 즉시 비활성화
     {        
         isDead = true;
         GiveStone();
         ReturnPool();
+    }
+
+    public void DeadWork()  //몬스터 죽는 모션. 죽는 애니메이션에서 이벤트 트리거를 통해 ReturnPool함
+    {
+        isDead = true;
+        ResetStatusEffect();
+        GiveStone();
+        cart.m_Speed = 0;
+        collisionArea.enabled = false;        
+
+        hpBarObj.SetActive(false);
+        anim.SetTrigger("Die");
+    }
+
+    public void HitAnimation()
+    {
+        hitEffect.SetActive(false);
+        hitEffect.SetActive(true);
+        
+        Vector3 hitEffectRandomPosition = new Vector3(hitEffectPosition.x + Random.Range(-0.2f,0.2f),hitEffectPosition.y + Random.Range(-0.2f, 0.2f), 5);
+        hitEffect.transform.localPosition = hitEffectRandomPosition;
     }
 
     public void StatusEffect(bool inputIsCold, bool inputIsBurn, bool inputIsChaos, bool inputIsStun, bool inputIsPushBack)
@@ -189,12 +228,15 @@ public class Enemy : MonoBehaviour
 
     void ResetStatusEffect()
     {
-        //isCold = false;
-        //isBurn = false;
-        //isChaos = false;
-        //isStun = false;
+        StopCoroutine("DamageCold");
+        StopCoroutine("DamageBurn");
+        StopCoroutine("DamageChaos");
+        StopCoroutine("DamageStun");        
+
         cart.ResetCart();
     }
+
+   
 
     public void PushAttack()
     {
