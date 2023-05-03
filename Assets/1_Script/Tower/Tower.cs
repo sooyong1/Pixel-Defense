@@ -64,10 +64,12 @@ public class Tower : MonoBehaviour
     private WaitForSeconds coroutineAttackRate;
 
     private Queue<GameObject> bulletPool = new Queue<GameObject>();
+    private UpgradeStar upgradeIcon;
 
     void Awake()
     {
         anim = GetComponentInChildren<Animator>();
+        upgradeIcon = GetComponentInChildren<UpgradeStar>();
         enemyManager = GameObject.FindWithTag("EnemyManager").GetComponent<EnemyManager>();
         bullet = towersAllBullet[usingBulletType];
         coroutineAttackRate = new WaitForSeconds(attackRate);
@@ -75,8 +77,7 @@ public class Tower : MonoBehaviour
         UpdateArrangeSpriteSize();
 
         if (attackShieldDamageRate < -1) attackShieldDamageRate = -1;
-
-        Debug.Log("here");
+        
     }
 
     void Start()
@@ -190,6 +191,11 @@ public class Tower : MonoBehaviour
         curSkinNum = skinNumber;
         anim = towerSkin[curSkinNum].GetComponentInChildren<Animator>();
         towerSkin[curSkinNum].SetActive(true);
+    }
+
+    public void UpgradStarIcon()
+    {
+        upgradeIcon.UpgradeTower();
     }
 
     public void UpdateArrangeSpriteSize()

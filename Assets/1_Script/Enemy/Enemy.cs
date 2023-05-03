@@ -159,12 +159,13 @@ public class Enemy : MonoBehaviour
     {
         isDead = true;
         ResetStatusEffect();
-        GiveStone();
+        GiveStone();        
+        collisionArea.enabled = false;
         cart.m_Speed = 0;
-        collisionArea.enabled = false;        
 
         hpBarObj.SetActive(false);
         anim.SetTrigger("Die");
+        
     }
 
     public void HitAnimation()
@@ -247,7 +248,8 @@ public class Enemy : MonoBehaviour
     {        
         cart.m_Speed = cart.originalSpeed/2;
         yield return new WaitForSeconds(5f);
-        cart.m_Speed = cart.originalSpeed;        
+        cart.m_Speed = cart.originalSpeed;
+        Debug.Log("Cold");
     }
     IEnumerator DamageBurn()
     {        

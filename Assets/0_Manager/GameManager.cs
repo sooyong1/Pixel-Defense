@@ -125,12 +125,13 @@ public class GameManager : MonoBehaviour
         if (!CheckStoneEnough(1)) return;
 
         PayColorStone(1);
-        curSelectTowerScript.Upgrade1();        
+        curSelectTowerScript.Upgrade1();
+        curSelectTowerScript.UpgradStarIcon();
         SetUpgradeButtonEnable();
 
         UpdateStoneCountTxt_Color();
         SetCurrentTowerUpgradePrice();
-        SetUpgradeInfoText();
+        SetUpgradeInfoText();        
     }
 
     public void Upgrade2BtnClick()
@@ -140,6 +141,7 @@ public class GameManager : MonoBehaviour
 
         PayColorStone(2);
         curSelectTowerScript.Upgrade2();
+        curSelectTowerScript.UpgradStarIcon();
         SetUpgradeButtonEnable();
 
         SetCurrentTowerUpgradePrice();

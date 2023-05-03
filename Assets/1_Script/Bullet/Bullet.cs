@@ -50,9 +50,9 @@ public class Bullet : Attack_Parent
             targetEnemy.Damage(0);
         }
         else
-        {
+        {            
             targetEnemy.Damage(damage, comboAttackCount, decreaseDamageRateComboAttack);
-            targetEnemy.StatusEffect(isCold, isBurn, isChaos, isStun, isPushBack);
+            if (!targetEnemy.GetIsDead()) targetEnemy.StatusEffect(isCold, isBurn, isChaos, isStun, isPushBack);
         }
 
         maxAttackCount--;
