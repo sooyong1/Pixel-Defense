@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bullet : Attack_Parent
 {
 
-    private float lifeTime = 1f;
+    [SerializeField] private float lifeTime = 1f;
     private int bulletType = 0;
     [SerializeField] private bool autoDeactive_attckCount0 = true;
     [SerializeField] private bool isUsePool = true;

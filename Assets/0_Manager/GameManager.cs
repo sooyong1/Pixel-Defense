@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private int stone_White = 150;
     [SerializeField] private Text stone_White_txt;
-    private int[] stone_Color = { 0, 0, 0, 0 }; //red green blue yellow
+    private int[] stone_Color = { 50, 50, 50, 50 }; //red green blue yellow
     [SerializeField] private Text[] stone_Color_txt;
     [SerializeField] private Text[] stone_Upgrade1Price_txt;
     [SerializeField] private Text[] stone_Upgrade2Price_txt;
