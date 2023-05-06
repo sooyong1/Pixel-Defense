@@ -231,9 +231,13 @@ public class Human_Magician : Tower
 
     public void Skill3_MakeFireMissile()
     {
+        GameObject myTarget = GetTargetInRange(attackRange);
+
+        if (myTarget == null) return;
+
         GameObject skillObj = Instantiate(towersAllSkill[2], new Vector3(firePosition.position.x, firePosition.position.y, 0), Quaternion.identity);
         Attack_Parent skillObjScript = skillObj.GetComponent<Attack_Parent>();
-        skillObj.GetComponent<FollowingTarget>().SetTarget(target);
+        skillObj.GetComponent<FollowingTarget>().SetTarget(myTarget);
 
         skillObjScript.SetMasterTower(this.gameObject);
         skillObjScript.SetDamage(attackDamage, attackDamage + (int)(attackDamage * attackShieldDamageRate));
@@ -241,8 +245,10 @@ public class Human_Magician : Tower
         skillObjScript.SetCanAttackArmor(canAttackArmor);
         skillObjScript.SetMaxAttackCount(1);
         skillObjScript.SetComboAttackCount(comboAttackCount);
-        skillObjScript.StatusEffect(isCold, isBurn, isChaos, isStun, isPushBack);
+        skillObjScript.StatusEffect(isCold, isBurn, isChaos, isStun, isPushBack);        
+
     }
+
 
     protected override void Skill4()
     {

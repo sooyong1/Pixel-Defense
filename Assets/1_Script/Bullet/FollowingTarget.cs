@@ -20,10 +20,11 @@ public class FollowingTarget : MonoBehaviour
 
     private void Update()
     {
-        if (target == null) return;
-
-        Vector3 targetDir = (target.transform.position - transform.position).normalized;
-        curVector = curVector + (targetDir * curSpeed);
+        if (target != null && target.activeSelf)
+        {
+            Vector3 targetDir = (target.transform.position - transform.position).normalized;
+            curVector = curVector + (targetDir * curSpeed);
+        }        
 
         transform.position += curVector* Time.deltaTime;
 

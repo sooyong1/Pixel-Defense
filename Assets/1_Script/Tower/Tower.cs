@@ -70,10 +70,9 @@ public class Tower : MonoBehaviour
     {
         anim = GetComponentInChildren<Animator>();
         upgradeIcon = GetComponentInChildren<UpgradeStar>();
-        enemyManager = GameObject.FindWithTag("EnemyManager").GetComponent<EnemyManager>();
+        enemyManager = GameObject.FindWithTag("EnemyManager").GetComponent<EnemyManager>();        
         bullet = towersAllBullet[usingBulletType];
-        coroutineAttackRate = new WaitForSeconds(attackRate);
-
+        coroutineAttackRate = new WaitForSeconds(attackRate);        
         UpdateArrangeSpriteSize();
 
         if (attackShieldDamageRate < -1) attackShieldDamageRate = -1;
@@ -184,6 +183,15 @@ public class Tower : MonoBehaviour
 
         makeBullet.SetActive(false);
     }    
+    public GameObject GetTargetInRange(float rangeValue)
+    {        
+        Collider2D[] colls = Physics2D.OverlapCircleAll(transform.position, rangeValue, LayerMask.GetMask("Enemy"));        
+        if (colls.Length == 0) return null;
+
+        int randIndex = Random.Range(0,colls.Length);
+
+        return colls[randIndex].gameObject;
+    }
 
     public void ChangeSkin(int skinNumber)
     {
@@ -215,7 +223,7 @@ public class Tower : MonoBehaviour
     public void AddAttackRange(float value)
     {
         attackRange += value;
-        UpdateArrangeSpriteSize();
+        UpdateArrangeSpriteSize();        
     }
 
     public void AddAttackRate(float value)
