@@ -14,6 +14,7 @@ TagManager:
   - GameManager
   - TowerManager
   - TowerArrangement
+  - Summon
   layers:
   - Default
   - TransparentFX
@@ -28,7 +29,7 @@ TagManager:
   - Spawner
   - TowerArrangement
   - Track
-  - 
+  - Summon
   - 
   - 
   - 
