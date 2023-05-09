@@ -62,6 +62,7 @@ public class Tower : MonoBehaviour
     protected string upgrade2_Info = "";
 
     private WaitForSeconds coroutineAttackRate;
+    private WaitForSeconds coroutineSearchRate = new WaitForSeconds(0.1f);
 
     private Queue<GameObject> bulletPool = new Queue<GameObject>();
     private UpgradeStar upgradeIcon;
@@ -108,7 +109,7 @@ public class Tower : MonoBehaviour
     {
         while (target == null)
         {
-            yield return null;
+            yield return coroutineSearchRate;
 
             float minDis = 1000f;
             GameObject targetEnemy = null;

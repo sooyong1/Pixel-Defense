@@ -150,8 +150,7 @@ public class Human_Worrior : Tower
     {
         ChangeSkin(4);
 
-        SetSkill(Skill2, skill2CoolTime);
-        isSkillReady = true;
+        Skill2();
 
         SetUpgrade1Function(null);
         SetUpgradePrice1(new int[] { 0, 0, 0, 0 });
@@ -232,7 +231,8 @@ public class Human_Worrior : Tower
 
     protected override void Skill2()
     {
-
+        Instantiate(towersAllSkill[1], new Vector3(firePosition.position.x, firePosition.root.position.y, 0), Quaternion.identity);
+        
     }
 
 
